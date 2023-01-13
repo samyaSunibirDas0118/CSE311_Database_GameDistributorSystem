@@ -1,0 +1,40 @@
+Name: Samya Sunibir Das
+ID: 1911563642
+
+1.
+
+SELECT Last_Name, Hire_Date
+FROM employees
+WHERE Department_Id = (
+SELECT Department_Id
+FROM Employees
+WHERE Last_Name = 'Zlotkey')
+AND Last_Name <> 'Zlotkey';
+
+2.
+
+SELECT Employee_Id, Last_Name, Salary
+FROM employees
+WHERE Salary > (SELECT AVG(Salary) FROM employees)
+ORDER BY Salary ASC
+
+3.
+
+SELECT Last_Name, Salary
+FROM employees
+WHERE Manager_id = (
+SELECT Employee_Id
+FROM Employees
+WHERE Last_Name LIKE 'King');
+
+4.
+
+SELECT Employee_Id, Last_Name, Salary
+FROM employees
+WHERE Department_Id IN (
+SELECT Department_Id
+FROM employees
+WHERE Last_Name LIKE '%u%')
+AND Salary > (
+SELECT AVG(Salary)
+FROM employees)

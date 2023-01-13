@@ -1,0 +1,9 @@
+WEEK 2 ASSIGNMENT
+NAME: Samya Sunibir Das
+ID: 1911563642
+
+1.
+SELECT last_name, (Salary/30)*7 AS "Weekly Salary", Department_Id FROM employees;
+
+2.
+SELECT CONCAT(Last_Name, ",", "  " ,Job_Id) AS "Employee and Title" FROM employees;

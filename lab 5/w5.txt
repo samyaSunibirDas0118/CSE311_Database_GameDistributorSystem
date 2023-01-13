@@ -1,0 +1,37 @@
+Name: Samya Sunibir Das
+ID: 1911563642
+Week 5
+
+1.
+
+SELECT ROUND(MAX(Salary)) AS 'Maximum', ROUND(MIN(Salary)) AS 'Minimum', ROUND(SUM(Salary)) AS 'Sum', ROUND(AVG(Salary)) AS 'Average'
+FROM employees;
+
+2.
+
+SELECT Job_Id, MAX(Salary) AS 'Maximum', MIN(Salary) AS 'Minimum', SUM(Salary) AS 'Sum', AVG(Salary) AS 'Average'
+FROM employees
+GROUP BY Job_Id;
+
+3.
+
+SELECT Job_Id,COUNT(Job_Id)
+FROM employees
+GROUP BY Job_Id;
+
+4.
+
+SELECT Manager_id, MIN(Salary)
+FROM employees
+WHERE Manager_id IS NOT NULL AND Salary > 6000
+GROUP BY Manager_id ORDER BY Salary DESC;
+
+5.
+
+SELECT Department_Name AS 'Name', City AS 'Location', COUNT(Employee_Id) AS 'Number of People', ROUND(AVG(Salary), 2) AS 'Salary'
+FROM employees
+JOIN departments
+ON(employees.Department_Id=departments.Department_Id)
+JOIN locations
+ON(departments.Location_id = locations.Location_id)
+GROUP BY(Department_Name);

@@ -1,0 +1,87 @@
+1.
+
+SELECT s_reviewer.name
+FROM s_reviewer, s_rating, shop_details
+WHERE shop_details.sID = s_rating.sID AND s_rating.rID=s_reviewer.rID AND (shop_details.sName = 'Pickaboo')
+
+2. 
+
+SELECT shop_details.sName AS "Reviewer_And_Shop_List"
+FROM shop_details
+UNION ALL(SELECT s_reviewer.name FROM s_reviewer)
+ORDER BY Reviewer_And_Shop_List
+
+
+3.
+
+SELECT DISTINCT shop_details.year
+FROM shop_details, s_rating
+WHERE shop_details.sID = s_rating.sID AND (s_rating.stars = 4 OR s_rating.stars = 5)
+ORDER BY shop_details.year ASC
+
+4.
+
+SELECT s_reviewer.name
+FROM s_reviewer, s_rating
+WHERE s_reviewer.rID = s_rating.rID AND s_rating.ratingDate is NULL
+
+5.
+SELECT DISTINCT x.name, y.name
+FROM s_rating R1 JOIN
+s_rating R2
+ON R1.sID = R2.sID join
+s_reviewer x
+ON x.rID = R1.rID join
+s_reviewer y
+ON y.rID = R2.rID and x.name < y.name
+
+6.
+
+SELECT  shop_details.owner
+FROM shop_details
+GROUP BY shop_details.owner
+HAVING COUNT(shop_details.owner)>1
+ORDER BY shop_details.owner ASC
+
+7.
+
+SELECT s_reviewer.name, MAX(s_rating.stars)
+FROM s_reviewer,s_rating
+WHERE s_reviewer.rID = s_rating.rID
+GROUP BY s_reviewer.rID
+HAVING COUNT(s_reviewer.rID) >=3
+
+8.
+
+SELECT DISTINCT shop_details.sName, shop_details.year
+FROM shop_details, s_rating
+WHERE shop_details.sID NOT IN ( SELECT DISTINCT sID FROM s_rating)
+
+9. 
+
+SELECT ABS(bef.avg_final_1 - af.avg_final_1) AS 'Difference'
+FROM 
+(
+SELECT AVG(T.avg1) as avg_final_1
+FROM (
+SELECT AVG(s_rating.stars) as avg1
+FROM s_rating, shop_details
+WHERE shop_details.sID=s_rating.sID AND shop_details.year < 2010
+GROUP BY shop_details.sID  ) AS T ) AS bef, 
+
+(
+SELECT AVG(T.avg1) as avg_final_1
+FROM (
+SELECT AVG(s_rating.stars) as avg1
+FROM shop_details, s_rating
+WHERE shop_details.sID=s_rating.sID AND shop_details.year > 2010
+GROUP BY shop_details.sID  ) AS T ) AS af
+
+10. 
+SELECT DISTINCT shop_details.sName
+FROM shop_details, s_reviewer, s_rating
+WHERE shop_details.sID = s_rating.sID AND s_rating.rID = s_reviewer.rID
+AND shop_details.sName not in 
+(SELECT shop_details.sName
+ FROM shop_details, s_reviewer, s_rating
+ WHERE shop_details.sID = s_rating.sID AND s_rating.rID = s_reviewer.rID AND s_reviewer.name = 'Forbes');

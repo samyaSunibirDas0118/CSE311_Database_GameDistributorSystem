@@ -1,0 +1,35 @@
+week 3
+name: Samya Sunibir Das
+ID: 1911563642
+
+1.
+
+SELECT Last_Name, Job_Id, Hire_Date
+FROM employees
+WHERE Hire_Date >='1988-02-20' AND Hire_Date<='1988-05-01'
+ORDER BY Hire_Date ASC;
+
+2.
+
+SELECT Last_Name, Department_Id
+FROM employees
+WHERE Department_Id BETWEEN 20 AND 50
+ORDER BY Last_Name ASC;
+
+3.
+
+SELECT Last_Name, Hire_Date
+FROM employees
+WHERE Hire_Date BETWEEN '1994-01-01' AND '1994-12-31';
+
+4.
+
+SELECT Last_Name, Salary, Commission_pct
+FROM employees
+WHERE Commission_pct IS NOT NULL
+ORDER BY Salary AND Commission_pct DESC;
+
+5.
+SELECT Last_Name
+FROM employees
+WHERE Last_Name LIKE '%a%' AND Last_Name LIKE '%e%';

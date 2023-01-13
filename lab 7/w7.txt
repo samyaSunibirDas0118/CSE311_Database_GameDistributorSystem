@@ -1,0 +1,62 @@
+Name: Samya Sunibir Das
+ID: 1911563642
+Lecture 1:
+
+1.
+
+CREATE TABLE similarEmployees LIKE employees;
+
+INSERT INTO similarEmployees VALUES
+(207, 'Tom','Jerry', 'TJERRY','525.123.8100', "2007-05-09", 'AD_PRES',9999,NULL, 100, 90),
+(208, 'Rick','Morty', 'RICKTY','500.100.8100', "2009-06-07", 'AC_ACCOUNT',10000,NULL, 205, 110),
+(209, 'John','Snow', 'NOTHING','420.01.800', "2010-06-07", 'AC_ACCOUNT',8100,NULL, 205, 110),
+(210, 'Bruce','Wayne', 'JOKER','777.123.8111', "2009-06-08", 'IT_PROG',8300,NULL, 103, 60),
+(211, 'Frank','Lampard', 'LAMPARD','888.188.8188', "2011-06-07", 'SA_REP',9500,NULL, 149, 80)
+
+
+INSERT IGNORE
+  INTO similaremployees
+SELECT *
+  FROM employees
+     ;
+
+Lecture 2:
+
+1.
+
+CREATE TABLE EMP(
+
+ID int(7),
+LAST_NAME VARCHAR(25),
+FIRST_NAME VARCHAR(25),
+DEPT_ID int(7)
+);
+
+
+a. 
+
+ALTER TABLE emp 
+MODIFY last_name VARCHAR(50);
+
+
+b.
+
+
+CREATE TABLE EMPLOYEES2 AS 
+SELECT EMPLOYEE_ID AS 'ID', FIRST_NAME , LAST_NAME, SALARY, DEPARTMENT_ID as 'DEPT_ID'
+FROM employees;
+
+
+c.
+
+DROP TABLE emp;
+
+d.
+
+ALTER TABLE employees2
+  RENAME TO EMP;
+
+e.
+
+ALTER TABLE emp
+  DROP COLUMN FIRST_NAME;

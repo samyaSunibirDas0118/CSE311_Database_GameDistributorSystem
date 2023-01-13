@@ -1,0 +1,95 @@
+Lab Final
+Name: Samya Sunibir Das
+ID: 1911563642
+
+1.
+
+SELECT DISTINCT analyst.Critic
+FROM analyst 
+INNER JOIN rating 
+ON analyst.aID = rating.aID
+INNER JOIN car
+ON car.cID = rating.cID
+WHERE model = 'Bettle'
+
+2.
+
+SELECT car.model AS "CriticAndModel"
+FROM car
+UNION ALL(SELECT analyst.Critic FROM analyst)
+ORDER BY CriticAndModel
+
+
+3.
+SELECT DISTINCT car.model, car.year
+FROM car, rating
+WHERE car.cID = rating.cID AND (rating.stars = 8 OR rating.stars = 10)
+ORDER BY car.model ASC
+
+
+4.
+
+SELECT analyst.Critic
+FROM analyst, rating
+WHERE analyst.aID = rating.aID AND rating.dateOfRating is NULL
+
+5.
+
+SELECT DISTINCT ANL2.Critic, ANL1.Critic
+FROM rating R1, rating R2, analyst ANL1, analyst ANL2
+WHERE R1.cID = R2.cID AND R1.aID = ANL1.aID AND R2.aID = ANL2.aID AND ANL1.Critic < ANL2.Critic
+ORDER BY ANL2.Critic, ANL1.Critic;
+
+6.
+
+SELECT model, brand
+FROM car c1
+WHERE (
+  SELECT COUNT(*) 
+  FROM car c2 
+  WHERE c1.brand=c2.brand) > 1
+ORDER BY brand;
+
+7.
+
+SELECT analyst.Critic, MAX(rating.stars)
+FROM analyst, rating
+WHERE analyst.aID = rating.aID
+GROUP BY analyst.aID
+HAVING COUNT(analyst.aID) >=3;
+
+8.
+
+UPDATE car
+SET car.year = car.year + 25
+WHERE cID IN (
+  SELECT DISTINCT car.cID
+  FROM car
+  INNER JOIN rating
+  ON car.cID = rating.cID
+  GROUP BY cID
+  HAVING AVG(stars) >= 8
+);
+
+9.
+
+Daten table:
+
+CREATE TABLE daten(
+cID INT,
+aID INT,
+DateOfUpdate Timestamp
+);
+
+Trigger:
+
+CREATE TRIGGER UPDATE_ON_RATING
+AFTER UPDATE
+ON rating FOR EACH ROW
+
+INSERT INTO daten VALUES (old.cID, old.aID, NOW());
+
+10.
+SELECT DISTINCT car.model, car.brand
+FROM car, rating
+WHERE car.cID NOT IN ( SELECT DISTINCT cID FROM rating);

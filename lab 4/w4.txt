@@ -1,0 +1,47 @@
+Week 4
+Name: Samya Sunibir Das
+ID: 1911563642
+
+
+1.
+
+SELECT employees.Last_Name, departments.Department_Id, departments.Department_Name
+FROM employees  JOIN departments 
+ON (employees.Department_Id=departments.Department_id);
+
+2.
+
+SELECT employees.Last_Name, departments.Department_Name, locations.Location_id, locations.City 
+FROM employees
+JOIN departments
+ON(employees.Department_Id=departments.Department_Id)
+JOIN locations
+ON(departments.Location_id = locations.Location_id)
+WHERE employees.Commission_pct IS NOT NULL;
+
+3.
+
+SELECT employees.Last_Name, employees.Job_Id, departments.Department_Id, departments.Department_Name 
+FROM employees
+JOIN departments
+ON(employees.Department_Id=departments.Department_Id)
+JOIN locations
+ON(departments.Location_id = locations.Location_id)
+WHERE locations.City = 'Toronto';
+
+4.
+
+SELECT Last_Name, Salary, Commission_pct
+FROM employees
+WHERE Commission_pct IS NOT NULL
+ORDER BY Salary AND Commission_pct DESC;
+
+5.
+SELECT worker.Last_Name AS 'Employee', worker.Employee_Id AS 'EMP#', manager.Last_Name AS 'Manager', manager.Employee_Id AS 'Mgr#'
+FROM employees worker, employees manager
+WHERE manager.Employee_Id = worker.Manager_id;
+
+
+
+
+
